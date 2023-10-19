@@ -1,0 +1,94 @@
+.page{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    opacity: 1;
+    box-sizing: border-box;
+}
+.page > div{
+    min-width: 600px;
+    margin: 20px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-weight: 900;
+    font-size: 32px;
+}
+.page-appear, 
+.page-enter{
+    left: 100%;
+}
+.page-appear-active, 
+.page-enter-active{
+    left: 0;
+    transition: all 700ms;
+}
+.page-exit{
+    left: 0;
+}
+.page-exit-active{
+    left: -100%;
+    transition: all 300ms;
+}
+
+
+
+.page-left-enter{
+    left: -100%;
+}
+.page-left-enter-active,
+.page-left-appear-active{
+    left: 0;
+    transition: all 700ms;
+}
+.page-left-exit{
+    left: 0;
+}
+.page-left-exit-active{
+    left: -100%;
+    transition: all 700ms;
+}
+
+
+
+.page-right-enter, .page-right-appear{
+    left: 100%;
+}
+.page-right-enter-active,
+.page-right-appear-active{
+    left: 0;
+    transition: all 700ms;
+}
+.page-right-exit{
+    left: 0;
+}
+.page-right-exit-active{
+    left: 100%;
+    transition: all 700ms;
+}
+
+.page1{
+    background-color: #7BC5AE;
+    /* rgb(181, 218, 254); */
+}
+.page2{
+    background-color: #7BC5AE;
+    /* rgb(220, 250, 152); */
+}
+.page3{
+    background-color: #7BC5AE;
+    /* rgb(255, 205, 202); */
+}
+.page4{
+    background-color: #fefefe;
+}
+
+
+/* #D1EDE1
+#028C6A */
