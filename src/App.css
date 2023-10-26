@@ -1,28 +1,167 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
 }
+html {
+    --scrollbarBG: #028C6A;
+    --thumbBG: #000;
+    background-color: #7BC5AE;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+::-webkit-scrollbar {
+    width: 11px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
 .App{
     height: 100vh;
     position: relative;
     overflow-x: hidden;
-    background-color: #434343;
+    font-weight: 900;
+    font-size: 32px;
+    --x: 32px;
 }
-.button_container{
+@media (max-width: 1000px) {
+    .App{
+        --x: 24px;
+    }
+}
+@media (max-width: 750px) {
+    .App{
+        --x: 20px;
+    }
+}
+@media (max-width: 600px) {
+    .App{
+        --x: 16px;
+    }
+} 
+
+
+.page_container {
+    width: 1000vw;
+    background-color: #D1EDE1;
+    transform: translateX(calc(var(--pageno) * -100vw));
+    transition: transform 0.5s ease-in-out;
+    display: flex;
+} 
+.page {
+    background-color: #7BC5AE;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0 50px;
+}
+@media (max-width:750px) {
+    .page{
+        padding: 0 calc(var(--x));
+    }
+}
+.page h2 {
+    margin-top: 70px;
+}
+.page>div,.page>h2,.page>h4 {
+    /* margin: 10px; */
+    padding-left: calc(0.3125 * var(--x));
+    padding-right: calc(0.3125 * var(--x));
+}
+#about_page>.about_text{
+    margin-top: 240px;
+}
+#about_page>.about_text>*{
+    max-width: 900px;
+    margin-bottom: 20px;
+}
+
+#contact_page>.contact_form_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.contact_form_container>*{
+    margin-top: 50px;
+    width: 50%;
+}
+.contact_form_container>form{
+    min-width: 400px;
+    max-width: 600px;
+}
+/* @media (max-width: 750px) {
+    #contact_page>.contact_form_container{
+        flex-direction: column;
+        width: 100%;
+    }
+} */
+
+
+/*       FORM       */
+
+#contact_page form>input, 
+#contact_page form>textarea {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid black;
+    background-color: #D1EDE1;
+    width: 100%;
+    margin-top: calc(var(--x) * 0.5);
+    padding: calc(var(--x) * 0.3125 / 2);;
+    outline: none;
+    resize: none;
+}
+#contact_page form>button{
+    margin-top: calc(var(--x) * 0.5);
+    margin-left: 0;
+}
+
+/*      CANVAS     */
+
+#canvas_hello{
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
     position: absolute;
-    width: 210px;
-    height: 30px;
+    z-index: 20;
+}
+#canvas_alt_hello_txt{
+    top: 0;
+    left: 20px;
+    position: absolute;
+}
+
+
+/*      BUTTONS     */
+
+.header {
+    position: absolute;
     top: 10px; 
     right: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    width: calc(100% - 20px);
+    z-index: 10;
 }
-.button_container>button{
+.name_cursive {
+    vertical-align: middle;
+    line-height: 0;
+}
+button {
     height: 30px;
-    width: 60px;
-    margin: 0 5px;
+    width: 75px;
+    margin: 10px 50px 10px 10px;
     border: 2px solid black;
-    font-weight: 200;
+    font-weight: 600;
     position: relative;
     background-color: transparent;
     overflow: hidden;
@@ -32,8 +171,11 @@
 button:hover::after{
     top: 0;
 }
-button:hover{
-    color: #fff;
+button.active::after{
+    top: 0;
+}
+button:hover, button.active{
+    color: #7BC5AE;
 }
 button::after{
     position: absolute;
@@ -46,6 +188,100 @@ button::after{
     z-index: -1;
     transition: top 0.2s linear;
 }
-.hello{
-    font-size: 128px;
+h2{ 
+    font-size: 3em;
+}
+h4{
+    font-size: 1.5em;
+}
+
+
+.social_links {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: flex-end;
+}
+@media (max-width: 600px) {
+    .social_links {
+        display: flex;
+        flex-direction: row;
+    }
+    #contact_page>.contact_form_container{
+        flex-direction: column;
+    }
+    .header>.button_container{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    .header button{
+        margin: 10px;
+    }
+}
+.social_links>div{
+    position: relative;
+    height: 30px;
+    width: 30px;
+    margin: 20px;
+}
+.social_links .email::before{
+    position: absolute;
+    content: 'Copy email id';
+    min-width: max-content;
+    padding: 5px;
+    background-color: #D1EDE1;
+    font-size: 12px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, calc(-100% - 8px));
+    z-index: 5;
+    visibility: hidden
+}
+.social_links .email::after{
+    position: absolute;
+    content: '';
+    background-color: #000;
+    border: 5px solid  #D1EDE1;
+    top: 0;
+    left: 50%;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, calc(-100% - 3px)) rotate(-45deg);
+    z-index: 4;
+    visibility: hidden
+}
+.social_links .email:hover::before, .social_links .email:hover::after{
+    visibility: visible;
+}
+.social_links .email:hover svg, .social_links .email:hover svg,
+.social_links .linkedin:hover svg, .social_links .linkedin:hover svg {
+    border-radius: 5px;
+    /* box-shadow: rgba(0, 0, 0, 0.54) 0px 3px 8px; */
+    background-color: #D1EDE1;
+}
+.social_links .email:active::before{
+/* .social_links .linkedin:active svg, .social_links .linkedin:active svg { */
+    /* border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.54) 0px 1px 2px; */
+    content: 'Copied : ukthakur00@gmail.com';
+    animation: tooltip 1s linear 0s 1;
+}
+.social_links a{
+    line-height: 0;
+    display: block;
+}
+
+/* #D1EDE1
+#028C6A */
+
+@keyframes tooltip {
+    start{
+        /* content: 'Copied : ukthakur00@gmail.com'; */
+        opacity: 1;
+    }
+    end{
+        /* content: 'Copied : ukthakur00@gmail.com'; */
+        opacity: 0;
+    }
 }
