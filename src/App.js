@@ -21,7 +21,7 @@ function App() {
   }
 
   useEffect(()=>{
-    if(windowWidth<500) return
+    if(windowWidth<100) return
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     canvas.width = window.innerWidth;
@@ -37,18 +37,24 @@ function App() {
       ctx.font = "bolder 210px monospace";
       ctx.fillText("HELLO", 60, 210); 
     }
-    else {
+    else if (windowWidth >= 500) {
       ctx.font = "bolder 150px monospace";
-      ctx.fillText("HELLO", 60, 210); 
+      ctx.fillText("HELLO", 40, 210); 
     }
+    else {
+      ctx.font = "bolder 80px monospace";
+      ctx.fillText("HELLO", 20, 180); 
+    }
+
+    let dpx = windowWidth >= 500 ? 5 : 3
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
     const data = imageData.data;
 
     const particles = []
-    for (let i = 0; i < canvas.height; i+=5) {
-        for (let j = 0; j < canvas.width; j+=5) {
+    for (let i = 0; i < canvas.height; i+=dpx) {
+        for (let j = 0; j < canvas.width; j+=dpx) {
             if(data[(i*canvas.width + j)*4+3] < 240) continue
             particles.push(new Particle(j, i, j+(100*Math.random()-50), i+(100*Math.random()-50)))  
         }
@@ -70,7 +76,7 @@ function App() {
           particles[i].velocity = particles[i].velocity.scale(0.9);
           
           ctx.beginPath();
-          ctx.arc(particles[i].position.x, particles[i].position.y, 2, 0, 2 * Math.PI, false);
+          ctx.arc(particles[i].position.x, particles[i].position.y, (dpx>=4?2:1.5), 0, 2 * Math.PI, false);
           ctx.fill()
       }
     }
@@ -135,7 +141,7 @@ function App() {
     phoneRef.current.value = ''
     messageRef.current.value = ''
 
-    // sendMessage()
+    sendMessage(message)
     console.log('SENT')
   }
 
@@ -160,7 +166,7 @@ function App() {
 
       <Page id={0}>
         <div id='about_page'>
-          {windowWidth<500 ? <h2 id='canvas_alt_hello_txt'>HELLO</h2> :
+          {windowWidth<100 ? <h2 id='canvas_alt_hello_txt'>HELLO</h2> :
           <canvas id='canvas_hello' ref={canvasRef} width={800} height={400} ></canvas>}
           <div className='about_text'>
             <h4>I'm <img className='name_cursive' src={NameCursive} alt="name_cursive"/>,

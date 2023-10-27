@@ -35,17 +35,20 @@ html {
 }
 @media (max-width: 1000px) {
     .App{
+        font-size: 30px;
         --x: 24px;
     }
 }
 @media (max-width: 750px) {
     .App{
+        font-size: 28px;
         --x: 20px;
     }
 }
 @media (max-width: 600px) {
     .App{
-        --x: 16px;
+        font-size: 24px;
+        --x: 12px;
     }
 } 
 
@@ -94,16 +97,9 @@ html {
     width: 50%;
 }
 .contact_form_container>form{
-    min-width: 400px;
-    max-width: 600px;
+    /* min-width: 300px; */
+    max-width: 700px;
 }
-/* @media (max-width: 750px) {
-    #contact_page>.contact_form_container{
-        flex-direction: column;
-        width: 100%;
-    }
-} */
-
 
 /*       FORM       */
 
@@ -135,7 +131,7 @@ html {
     z-index: 20;
 }
 #canvas_alt_hello_txt{
-    top: 0;
+    top: 50px;
     left: 20px;
     position: absolute;
 }
@@ -168,7 +164,7 @@ button {
     transition: color 0.2s linear;
     z-index: 1;
 }
-button:hover::after{
+button:hover::after, button:active::after{
     top: 0;
 }
 button.active::after{
@@ -189,7 +185,7 @@ button::after{
     transition: top 0.2s linear;
 }
 h2{ 
-    font-size: 3em;
+    font-size: 2em;
 }
 h4{
     font-size: 1.5em;
@@ -211,13 +207,16 @@ h4{
     #contact_page>.contact_form_container{
         flex-direction: column;
     }
+    #contact_page>.contact_form_container>form{
+        width: 100%;
+    }
     .header>.button_container{
         width: 100%;
         display: flex;
         justify-content: space-around;
     }
     .header button{
-        margin: 10px;
+        margin: 10px 0;
     }
 }
 .social_links>div{
